@@ -1,0 +1,21 @@
+version: '3.8'
+services:
+  hello:
+    build:
+      context: .
+      args:
+        NODE_ENV: production
+    image: hello-app:latest
+    restart: unless-stopped
+    ports:
+      - "1122:1122"
+    environment:
+      NODE_ENV: production
+      PORT: 1122
+      CORS_ORIGIN: ${CORS_ORIGIN:-https://hello.basarsubasi.xyz}
+    networks:
+      - web
+
+networks:
+  web:
+    driver: bridge
